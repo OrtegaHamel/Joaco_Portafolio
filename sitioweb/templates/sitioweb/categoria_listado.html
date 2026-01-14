@@ -1,0 +1,87 @@
+{% extends 'sitioweb/base.html' %}
+{% load i18n %}
+
+{% block title %}{{ categoria.nombre }} | Joaco{% endblock %}
+
+{% block content %}
+<div class="row pt-4">
+    <div class="col-12 mb-5">
+        <h1 class="display-4 fw-bold text-uppercase">{{ categoria.nombre }}</h1>
+    </div>
+
+    <div class="col-12">
+        <div class="row g-4">
+            {% for proyecto in proyectos %}
+                <div class="col-md-6 col-lg-4">
+                    <a href="{% url 'proyecto_detalle' proyecto.pk %}" class="text-decoration-none">
+                        <div class="card bg-dark border-0 project-card overflow-hidden position-relative">
+                            
+                            <div class="ratio ratio-16x9">
+                                <img src="{{ proyecto.miniatura.url }}" 
+                                     class="card-img object-fit-cover" 
+                                     alt="{{ proyecto.nombre }}">
+                            </div>
+
+                            <div class="project-overlay d-flex flex-column justify-content-center align-items-center text-center p-3">
+                                <h5 class="text-warning fw-bold mb-2">{{ proyecto.nombre }}</h5>
+                                {% if proyecto.tagline %}
+                                    <div class="small text-light opacity-75 tagline-preview">
+                                        {{ proyecto.tagline|truncatewords:10|linebreaksbr }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </a>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <div class="alert alert-dark border-secondary text-center py-5">
+                        <p class="mb-0 text-secondary">{% trans "No hay proyectos cargados aún." %}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Contenedor principal de la tarjeta */
+    .project-card {
+        cursor: pointer;
+    }
+
+    /* La capa que contiene el texto */
+    .project-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #38761d; /* Fondo verde semitransparente */
+        opacity: 0; /* Invisible por defecto */
+        transition: opacity 0.4s ease;
+        z-index: 2;
+    }
+
+    /* Al pasar el mouse, mostramos la capa */
+    .project-card:hover .project-overlay {
+        opacity: 1;
+    }
+
+    /* Efecto de zoom suave en la imagen de fondo */
+    .project-card img {
+        transition: transform 0.6s ease;
+    }
+
+    .project-card:hover img {
+        transform: scale(1.1);
+    }
+
+    /* Estilo para la ficha técnica dentro del hover */
+    .tagline-preview {
+        font-size: 0.85rem;
+        line-height: 1.2;
+    }
+</style>
+{% endblock %}

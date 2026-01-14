@@ -1,0 +1,48 @@
+{% extends 'sitioweb/base.html' %}
+{% load video_filters %}
+{% load i18n %}
+
+{% block title %}{{ proyecto.nombre }} | Portafolio{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <h1 class="display-4 fw-bold mb-4 text-center text-uppercase">{{ proyecto.nombre }}</h1>
+
+        {% if proyecto.ficha_tecnica %}
+            <div class="text-end mt-3 mb-4 pt-2">
+                <p class="lead text-secondary">{{ proyecto.ficha_tecnica|linebreaks }}</p>
+            </div>
+        {% endif %}
+
+        <h3 class="h5 mb-3 pt-4 text-uppercase">{% trans "Capturas" %}</h3>
+        <div class="row g-3 mb-5">
+            {% for captura in proyecto.capturas.all %}
+                <div class="col-md-6 col-lg-4">
+                    <img src="{{ captura.imagen.url }}" class="img-fluid rounded shadow-sm" alt="Still">
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="videos-section mb-5">
+            {% for video in proyecto.videos.all %}
+                <div class="mb-4">
+                    {% if video.titulo_video %}
+                        <h4 class="h6 mb-2">{{ video.titulo_video }}</h4>
+                    {% endif %}
+                    <div class="ratio ratio-16x9 shadow rounded overflow-hidden">
+                        <iframe src="{{ video.url_video|embed_video }}" allowfullscreen></iframe>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        {% if proyecto.descripcion %}
+        <div class="mt-5 pt-4">
+            <p class="lead text-secondary">{{ proyecto.descripcion|linebreaks }}</p>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+{% endblock %}

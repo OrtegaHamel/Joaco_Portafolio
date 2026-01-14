@@ -1,0 +1,252 @@
+{% extends 'sitioweb/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<div class="home-scene">
+    <div class="canvas">
+        
+        <a href="{% url 'about_me' %}" class="obj-home joaco-main text-decoration-none">
+            <div class="joaco-head-container">
+                <div class="eyes-container">
+                    <div class="eye">
+                        <div class="pupil"></div></div>
+                    <div class="eye">
+                        <div class="pupil"></div></div>
+                </div>
+                <img src="{% static 'sitioweb/img/Joaco_blind.png' %}" class="head-img">
+            </div>
+            <span class="hover-label">{% trans "Sobre mí" %}</span>
+        </a>
+
+        <a href="https://substack.com/@gordinirojo" target="_blank" class="obj-home btn-blog">
+            <img src="{% static 'sitioweb/img/blog.png' %}" alt="Blog">
+            <span class="hover-label">{% trans "Blog" %}</span>
+        </a>
+
+        <div class="mesa-group">
+            <img src="{% static 'sitioweb/img/mesa.png' %}" class="mesa-img">
+            
+            <a href="{% url 'categoria_detalle' 'realizador' %}" class="obj-mesa cono">
+                <img src="{% static 'sitioweb/img/Cono.png' %}">
+                <span class="hover-label">{% trans "Realizador" %}</span>
+            </a>
+            
+            <a href="{% url 'categoria_detalle' 'postproductor' %}" class="obj-mesa consola">
+                <img src="{% static 'sitioweb/img/consola.png' %}">
+                <span class="hover-label">{% trans "Postproductor" %}</span>
+            </a>
+            
+            <a href="{% url 'categoria_detalle' 'director-de-fotografia' %}" class="obj-mesa camara">
+                <img src="{% static 'sitioweb/img/camara.png' %}">
+                <span class="hover-label">{% trans "Director de Fotografía" %}</span>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<style>
+    body { background-color: #38761d !important; margin: 0; overflow: hidden; }
+
+    .home-scene {
+        width: 100%;
+        height: 90vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .canvas {
+        position: relative;
+        width: 95%;
+        max-width: 1000px;
+        aspect-ratio: 16 / 9; 
+        margin-top: 60px;
+    }
+
+    .obj-home { position: absolute; transition: all 0.3s ease; z-index: 1; }
+
+    /* POSICIÓN DE JOACO (A la izquierda) */
+    .joaco-main {
+        width: 38%;
+        left: 20%;
+        bottom: 25%;
+    }
+
+    /* POSICIÓN DEL BLOG (Arriba a la derecha) */
+    .btn-blog {
+        width: 28%;
+        right: 9%;
+        top: -12%;
+    }
+
+    /* GRUPO MESA */
+    .mesa-group {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        z-index: 2;
+    }
+
+    .mesa-img { width: 100%; display: block; }
+
+    /* OBJETOS SOBRE LA MESA (Control total aquí) */
+    .obj-mesa { position: absolute; transition: all 0.3s ease; z-index: 3; }
+
+    .cono {
+        width: 25%;
+        left: 7%;
+        top: -25%; 
+    }
+
+    .consola {
+        width: 33%;
+        left: 33%;
+        top: -10%;
+    }
+
+    .camara {
+        width: 27%;
+        right: 7%;
+        top: -28%;
+    }
+
+    /* --- HOVER JOACO  --- */
+    .joaco-main:hover {
+        filter: brightness(1.2);
+    }
+
+    /* --- HOVER BLOG (Movimiento hacia arriba como la mesa) --- */
+    .btn-blog:hover {
+        transform: translateY(-15px);
+        filter: brightness(1.2);
+    }
+
+    /* --- HOVER OBJETOS MESA (Movimiento hacia arriba) --- */
+    .obj-mesa:hover {
+        transform: translateY(-10px);
+        filter: brightness(1.2);
+    }
+
+    /* --- REGLA PARA LAS ETIQUETAS (Asegura que se vean en todos) --- */
+    .joaco-main:hover .hover-label, 
+    .btn-blog:hover .hover-label, 
+    .obj-mesa:hover .hover-label { 
+        opacity: 1; 
+    }
+
+    .hover-label {
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #38761d;
+        color: #ffd966;
+        padding: 4px 10px;
+        font-size: 0.85rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s;
+        white-space: nowrap;
+    }
+
+
+    .joaco-head-container {
+        position: relative;
+        width: 100%; /* Joaco vuelve a su tamaño natural según su contenedor padre */
+        display: inline-block;
+    }
+
+    .head-img {
+        position: relative;
+        z-index: 1; /* Encima de las pupilas */
+        height: auto;
+        width: 100%;
+    }
+
+    /* Contenedor de las órbitas */
+    .eyes-container {
+        position: absolute;
+        top: 16%; /* Ajusta estos % según la posición de los ojos en tu PNG */
+        left: 37%;
+        width: 30%;
+        height: 30px;
+        display: flex;
+        justify-content: space-around;
+        z-index: 999; /* Detrás de la cabeza */
+        pointer-events: none;
+       /* border: 2px solid green;  PARA TESTEAR */
+       border: none;
+       
+    }
+
+    .eye {
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        /* Forma circular para la órbita */
+        border-radius: 50%; 
+    }
+
+    /* El párpado redondeado */
+    
+    @keyframes parpadeo-realista {
+        0%, 90%, 100% { 
+            transform: translateY(0); /* Abierto */
+        }
+        93%, 97% { 
+            transform: translateY(100%); /* Baja cubriendo con la curva */
+        }
+    }
+
+    .pupil {
+        width: 9px; 
+        height: 9px;
+        background-color: black !important; 
+        background-image: url("{% static 'sitioweb/img/Joaco_ojos.png' %}"); 
+        background-size: contain; /* Asegura que el ojo quepa en los 15px */
+        background-repeat: no-repeat;
+        background-position: center;
+        border-radius: 50%;
+        position: relative;
+        transition: transform 0.1s ease-out;
+    }
+
+    
+
+    img { width: 100%; height: auto; }
+</style>
+
+<script>
+    // Esperamos a que el ratón se mueva sobre el documento
+    document.addEventListener('mousemove', (e) => {
+        const pupils = document.querySelectorAll('.pupil');
+        
+        pupils.forEach(pupil => {
+            // Obtenemos la posición del centro de la pupila
+            const rect = pupil.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            // Calculamos el ángulo entre el cursor y el centro del ojo
+            const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
+            
+            // "distance" es el radio máximo que se moverá la pupila dentro del cuadro amarillo
+            // Como tu cuadro amarillo mide 30px y la pupila 9px, 5 o 6 es un buen número.
+            const distance = 5; 
+            
+            const moveX = Math.cos(angle) * distance;
+            const moveY = Math.sin(angle) * distance;
+            
+            // Aplicamos el movimiento
+            pupil.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
+    });
+</script>
+
+{% endblock %}

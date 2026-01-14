@@ -1,0 +1,20 @@
+# Entorno Virtual
+myenv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Django
+media/
+staticfiles/
+
+# Archivos de configuración
+.env
+
+# Editores
+.vscode/
+.idea/
+.DS_Store

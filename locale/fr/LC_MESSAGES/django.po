@@ -1,0 +1,50 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
+
+msgid "Portafolio"
+msgstr "Portfolio"
+
+msgid "HOME"
+msgstr "ACCUEIL"
+
+msgid "REALIZADOR"
+msgstr "RÉALISATEUR"
+
+msgid "POSTPRODUCTOR"
+msgstr "POST-PRODUCTEUR"
+
+msgid "DIRECTOR DE FOTOGRAFÍA"
+msgstr "DIRECTEUR DE LA PHOTOGRAPHIE"
+
+msgid "Sobre mí"
+msgstr "À propos"
+
+msgid "Blog"
+msgstr "Blog"
+
+msgid "Realizador"
+msgstr "Réalisateur"
+
+msgid "Postproductor"
+msgstr "Post-producteur"
+
+msgid "Director de Fotografía"
+msgstr "Directeur de la Photographie"
+
+msgid "No hay proyectos cargados aún."
+msgstr "Aucun projet chargé pour le moment."
+
+msgid "Capturas"
+msgstr "Captures"
+
+msgid "Imágenes"
+msgstr "Images"
+
+msgid "Sin foto de perfil"
+msgstr "Pas de photo de profil"
+
+msgid "Joaco Portafolio"
+msgstr "Joaco Portfolio"
