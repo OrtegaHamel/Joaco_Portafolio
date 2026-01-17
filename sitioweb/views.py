@@ -1,20 +1,45 @@
 from django.shortcuts import render, get_object_or_404 #Bedford_or_404
 from .models import Categoria, Proyecto, Perfil
+from django.utils.translation import gettext_lazy as _
 
 def home(request):
     # Esta vista solo renderiza la ilustración inicial
     return render(request, 'sitioweb/home.html')
 
 def categoria_detalle(request, slug):
-    # Buscamos la categoría por su slug (ej: 'colorista')
+    # 1. Obtenemos la categoría base
     categoria = get_object_or_404(Categoria, slug=slug)
     
-    # Filtramos los proyectos que pertenecen a esa categoría
+    # 2. Filtramos los proyectos que pertenecen a esa categoría
     proyectos = Proyecto.objects.filter(categoria=categoria)
     
+    # 3. FILTRADO POR SUB-CATEGORÍA
+    # Capturamos el parámetro 'sub_cat' de la URL (ej: ?sub_cat=ficcion)
+    sub_cat = request.GET.get('sub_cat')
+    valid_sub_cats = [choice[0] for choice in Proyecto.SUB_CATEGORIAS] # ['ficcion', 'documental', etc.]
+    
+    if sub_cat in valid_sub_cats:
+        proyectos = proyectos.filter(sub_categoria=sub_cat)
+    
+    # 4. ORDENAMIENTO
+    # Capturamos el parámetro 'orden' de la URL (ej: ?orden=alfabetico)
+    orden = request.GET.get('orden')
+    
+    if orden == 'alfabetico':
+        proyectos = proyectos.order_by('nombre')
+    elif orden == 'fecha':
+        proyectos = proyectos.order_by('-fecha_estreno')
+    else:
+        # Orden por defecto: los más nuevos primero
+        proyectos = proyectos.order_by('-fecha_estreno')
+    
+    # 5. CONTEXTO
     context = {
         'categoria': categoria,
         'proyectos': proyectos,
+        'sub_cat_actual': sub_cat,
+        'orden_actual': orden,
+        'sub_categorias': Proyecto.SUB_CATEGORIAS, # Para armar el menú en el HTML
     }
     return render(request, 'sitioweb/categoria_listado.html', context)
 

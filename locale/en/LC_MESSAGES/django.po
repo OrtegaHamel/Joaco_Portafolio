@@ -17,10 +17,13 @@ msgid "POSTPRODUCTOR"
 msgstr "POST-PRODUCER"
 
 msgid "DIRECTOR DE FOTOGRAFÍA"
-msgstr "DIRECTOR OF PHOTOGRAPHY"
+msgstr "CINEMATOGRAPHER"
 
 msgid "Sobre mí"
 msgstr "About me"
+
+msgid "CONTACTO"
+msgstr "Contact"
 
 msgid "Blog"
 msgstr "Blog"
@@ -32,7 +35,25 @@ msgid "Postproductor"
 msgstr "Post-producer"
 
 msgid "Director de Fotografía"
-msgstr "Director of Photography"
+msgstr "Cinematographer"
+
+msgid "Ficción"
+msgstr "Fiction"
+
+msgid "Documental"
+msgstr "Documentary"
+
+msgid "Videoclip"
+msgstr "Music Video"
+
+msgid "Experimental"
+msgstr "Experimental"
+
+msgid "Todos"
+msgstr "All"
+
+msgid "Más recientes"
+msgstr "Most recent"
 
 msgid "No hay proyectos cargados aún."
 msgstr "No projects uploaded yet."
@@ -48,3 +69,9 @@ msgstr "No profile picture"
 
 msgid "Joaco Portafolio"
 msgstr "Joaco Portfolio"
+
+msgid "Desarrollado por"
+msgstr "Developed by"
+
+msgid "Descargar CV"
+msgstr "Download CV"

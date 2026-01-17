@@ -144,7 +144,10 @@
         background: #38761d;
         color: #ffd966;
         padding: 4px 10px;
-        font-size: 0.85rem;
+        font-size: 1rem;
+        font-family: "Jersey 10", sans-serif;
+        font-weight: 400;
+        font-style: normal;
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.3s;
@@ -168,52 +171,41 @@
     /* Contenedor de las órbitas */
     .eyes-container {
         position: absolute;
-        top: 16%; /* Ajusta estos % según la posición de los ojos en tu PNG */
-        left: 37%;
-        width: 30%;
-        height: 30px;
+        top: 13%; 
+        left: 41%; /* Pequeño ajuste para centrar mejor */
+        width: 21%;  /* Reducimos un poco el ancho total */
+        height: 18%; /* Cambiamos px por % del alto de la cabeza */
         display: flex;
-        justify-content: space-around;
-        z-index: 999; /* Detrás de la cabeza */
+        justify-content: space-between; /* Mejor que around para órbitas fijas */
+        z-index: 999;
         pointer-events: none;
-       /* border: 2px solid green;  PARA TESTEAR */
-       border: none;
-       
     }
 
     .eye {
-        width: 35px;
-        height: 35px;
+        width: 30%; /* El ojo ahora es el 35% del contenedor de ojos */
+        aspect-ratio: 1 / 1; /* Mantiene el círculo perfecto siempre */
+        height: auto;
         display: flex;
         align-items: center;
         justify-content: center;
         position: relative;
         overflow: hidden;
-        /* Forma circular para la órbita */
         border-radius: 50%; 
     }
 
-    /* El párpado redondeado */
-    
-    @keyframes parpadeo-realista {
-        0%, 90%, 100% { 
-            transform: translateY(0); /* Abierto */
-        }
-        93%, 97% { 
-            transform: translateY(100%); /* Baja cubriendo con la curva */
-        }
-    }
-
     .pupil {
-        width: 9px; 
-        height: 9px;
+        width: 40%; /* La pupila es el 40% del ojo */
+        aspect-ratio: 1 / 1;
+        height: auto;
         background-color: black !important; 
         background-image: url("{% static 'sitioweb/img/Joaco_ojos.png' %}"); 
-        background-size: contain; /* Asegura que el ojo quepa en los 15px */
+        background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
         border-radius: 50%;
-        position: relative;
+        position: absolute; /* Cambiado a absolute */
+        top: 27.5%; /* Centrado inicial ( (100-45)/2 ) */
+        left: 27.5%;
         transition: transform 0.1s ease-out;
     }
 
@@ -223,27 +215,30 @@
 </style>
 
 <script>
-    // Esperamos a que el ratón se mueva sobre el documento
-    document.addEventListener('mousemove', (e) => {
+   document.addEventListener('mousemove', (e) => {
+        const container = document.querySelector('.eyes-container');
         const pupils = document.querySelectorAll('.pupil');
         
+        if (!container) return;
+
+        // 1. Calculamos el centro del contenedor de los ojos (punto de referencia único)
+        const rect = container.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        // 2. Calculamos el ángulo hacia el ratón desde el centro de la cara
+        const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
+
+        // 3. Calculamos una distancia de movimiento que dependa del tamaño actual del ojo
+        // Usamos el ancho de un ojo para que sea proporcional
+        const eyeWidth = document.querySelector('.eye').offsetWidth;
+        const maxDistance = eyeWidth * 0.25; // 25% del ancho del ojo como radio de movimiento
+
+        const moveX = Math.cos(angle) * maxDistance;
+        const moveY = Math.sin(angle) * maxDistance;
+
+        // 4. Aplicamos el MISMO movimiento a ambas pupilas
         pupils.forEach(pupil => {
-            // Obtenemos la posición del centro de la pupila
-            const rect = pupil.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            
-            // Calculamos el ángulo entre el cursor y el centro del ojo
-            const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
-            
-            // "distance" es el radio máximo que se moverá la pupila dentro del cuadro amarillo
-            // Como tu cuadro amarillo mide 30px y la pupila 9px, 5 o 6 es un buen número.
-            const distance = 5; 
-            
-            const moveX = Math.cos(angle) * distance;
-            const moveY = Math.sin(angle) * distance;
-            
-            // Aplicamos el movimiento
             pupil.style.transform = `translate(${moveX}px, ${moveY}px)`;
         });
     });

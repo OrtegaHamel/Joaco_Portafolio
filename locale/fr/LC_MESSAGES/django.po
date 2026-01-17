@@ -8,7 +8,7 @@ msgid "Portafolio"
 msgstr "Portfolio"
 
 msgid "HOME"
-msgstr "ACCUEIL"
+msgstr "HOME"
 
 msgid "REALIZADOR"
 msgstr "RÉALISATEUR"
@@ -17,10 +17,13 @@ msgid "POSTPRODUCTOR"
 msgstr "POST-PRODUCTEUR"
 
 msgid "DIRECTOR DE FOTOGRAFÍA"
-msgstr "DIRECTEUR DE LA PHOTOGRAPHIE"
+msgstr "CHEF OP"
 
 msgid "Sobre mí"
 msgstr "À propos"
+
+msgid "CONTACTO"
+msgstr "CONTACT"
 
 msgid "Blog"
 msgstr "Blog"
@@ -32,13 +35,31 @@ msgid "Postproductor"
 msgstr "Post-producteur"
 
 msgid "Director de Fotografía"
-msgstr "Directeur de la Photographie"
+msgstr "Chef Op"
+
+msgid "Ficción"
+msgstr "Fiction"
+
+msgid "Documental"
+msgstr "Documentaire"
+
+msgid "Videoclip"
+msgstr "Clip Vidéo"
+
+msgid "Experimental"
+msgstr "Expérimental"
+
+msgid "Todos"
+msgstr "Tous"
+
+msgid "Más recientes"
+msgstr "Plus récents"
 
 msgid "No hay proyectos cargados aún."
 msgstr "Aucun projet chargé pour le moment."
 
 msgid "Capturas"
-msgstr "Captures"
+msgstr "Captures d'écran"
 
 msgid "Imágenes"
 msgstr "Images"
@@ -48,3 +69,9 @@ msgstr "Pas de photo de profil"
 
 msgid "Joaco Portafolio"
 msgstr "Joaco Portfolio"
+
+msgid "Desarrollado por"
+msgstr "Développé par"
+
+msgid "Descargar CV"
+msgstr "Télécharger le CV"

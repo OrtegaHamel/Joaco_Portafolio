@@ -1,0 +1,244 @@
+/* ==========================================================================
+   1. VARIABLES Y CONFIGURACIÓN BASE
+   ========================================================================== */
+html, body {
+  height: 100%;
+}
+
+body {
+  /* Reemplazamos el color sólido por la imagen */
+  background-image: url("../img/tile3.png");
+  
+  /* Esto hace que la imagen se repita infinitamente (Tiling) */
+  background-repeat: repeat;
+  
+  /* Mantiene el tamaño original de la imagen para que no se deforme */
+  background-size: auto;
+  
+  /* EVITA EL DESENFOQUE: Mantiene los píxeles definidos al escalar */
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+
+  /* Color de respaldo por si la imagen tarda en cargar */
+  background-color: #38761d;
+  color: #ffd966;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+/* ==========================================================================
+   2. TIPOGRAFÍA GENERAL
+   ========================================================================== */
+h1, h5 {
+  font-family: "Jersey 20", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h4, .contacto-section {
+  font-family: "Jersey 10", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.contacto-section {
+  font-size: 1.5rem;
+}
+
+span.text-warning.small {
+  font-size: 0.9rem;
+  font-family: "Jersey 10", sans-serif;
+}
+
+/* ==========================================================================
+   3. NAVBAR (RESPONSIVO)
+   ========================================================================== */
+.navbar {
+  background-color: transparent !important;
+  font-family: "Jersey 10", sans-serif;
+  /* Escala dinámicamente entre 1.2rem y 2rem */
+  font-size: clamp(1.2rem, 2vw, 2rem); 
+  padding: 1rem 0;
+}
+
+/* Eliminar posibles paddings que desalineen el navbar */
+.navbar .container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 0 !important;
+}
+
+.navbar-brand {
+  color: #ffd966 !important;
+  font-family: "Jersey 10", sans-serif;
+  font-size: clamp(1.3rem, 2.5vw, 2rem) !important;
+  transition: opacity 0.3s ease;
+  white-space: nowrap;
+}
+
+.navbar-brand:hover {
+  opacity: 0.8;
+}
+
+.navbar .nav-link {
+  color: white !important;
+  font-size: clamp(0.9rem, 1.5vw, 1.5rem);
+  white-space: nowrap;
+  transition: color 0.3s ease; /* Transición suave igual que el footer */
+}
+
+/* EFECTO HOVER: Igual que el footer */
+.navbar .nav-link:hover {
+  color: #ffd966 !important; /* El amarillo que usa el cliente */
+}
+
+
+/* ==========================================================================
+   4. FOOTER (RESPONSIVO)
+   ========================================================================== */
+footer {
+  background-color: transparent !important;
+  border-top: none;
+  flex-shrink: 0;
+  font-family: "Jersey 10", sans-serif;
+  padding: 1.5rem 0;
+}
+
+footer .navbar-brand {
+  color: #ffd966 !important;
+  font-family: "Jersey 20", sans-serif;
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem) !important;
+}
+
+footer .nav-link {
+  text-transform: uppercase;
+  font-size: clamp(0.9rem, 1.5vw, 1.5rem);
+  letter-spacing: 0px;
+}
+
+footer .nav-link:hover {
+  color: #ffd966 !important;
+}
+
+/* ==========================================================================
+   5. COMPONENTES RETRO (SELECTORES Y BOTONES)
+   ========================================================================== */
+
+/* Selector de Idiomas */
+.form-select-sm {
+  background-color: transparent !important;
+  color: #ffd966 !important;
+  border: 2px solid #ffd966 !important;
+  border-radius: 0 !important;
+  font-family: "Jersey 10", sans-serif;
+  font-size: clamp(0.8rem, 1vw, 1.1rem);
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+
+  /* NUEVA FLECHA AMARILLA PIXELADA */
+  /* Quitamos la flecha por defecto y ponemos una amarilla con estilo de bloque */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffd966' stroke-linecap='square' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 0.75rem center !important;
+  background-size: 12px 10px !important;
+  padding-right: 2rem !important; /* Espacio para que el texto no pise la flecha */
+  padding-left: 1rem !important;
+}
+
+.form-select-sm:focus {
+  outline: none;
+  box-shadow: 4px 4px 0px #2a5a16;
+  background-color: transparent !important;
+}
+
+.form-select-sm option {
+  /* Mantener fondo oscuro para que las letras amarillas se lean al desplegar */
+  background-color: #38761d;
+  color: #ffd966;
+  font-family: "Jersey 10", sans-serif;
+}
+
+/* Sub-categorías (Pills) */
+.custom-pills .nav-link {
+  color: #ffd966;
+  font-family: "Jersey 10", sans-serif;
+  text-transform: uppercase;
+  font-size: clamp(0.9rem, 1.2vw, 1.4rem); 
+  border-radius: 0 !important;
+  border: 2px solid transparent;
+  margin: 2px;
+  transition: all 0.1s steps(2);
+  white-space: nowrap;
+}
+
+.custom-pills .nav-link.active {
+  background-color: #ffd966 !important;
+  color: #38761d !important;
+  border: 2px solid #ffd966;
+  box-shadow: 4px 4px 0px #2a5a16; 
+}
+
+/* Botones de Orden (A-Z / Recientes) */
+.btn-retro {
+  font-family: "Jersey 10", sans-serif;
+  text-transform: uppercase;
+  border-radius: 0 !important;
+  border: 2px solid #ffd966 !important;
+  background-color: transparent;
+  color: #ffd966;
+  padding: 5px 12px;
+  font-size: clamp(0.8rem, 1vw, 1.1rem);
+  image-rendering: pixelated;
+  white-space: nowrap;
+}
+
+.btn-retro.active-retro {
+  background-color: #ffd966 !important;
+  color: #38761d !important;
+  box-shadow: 3px 3px 0px #2a5a16;
+}
+
+.btn-retro:hover {
+  background-color: rgba(255, 217, 102, 0.2);
+  color: #ffd966;
+}
+
+/* ==========================================================================
+   6. MEDIA QUERIES (AJUSTES FINALES MÓVIL)
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Barra de filtros */
+  .d-flex.flex-column.flex-md-row {
+    gap: 20px !important;
+  }
+
+  .custom-pills {
+    justify-content: center;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+
+  .btn-group-retro {
+    justify-content: center;
+    width: 100%;
+    gap: 10px;
+  }
+
+  /* Navbar y Footer apilados */
+  .navbar .container, 
+  footer .container {
+    flex-direction: column !important;
+    gap: 15px;
+  }
+
+  .navbar-nav {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px !important;
+  }
+}
