@@ -16,7 +16,7 @@ msgstr "FILMMAKER"
 msgid "POSTPRODUCTOR"
 msgstr "POST-PRODUCER"
 
-msgid "DIRECTOR DE FOTOGRAFÍA"
+msgid "DIRECTOR DE FOTO"
 msgstr "CINEMATOGRAPHER"
 
 msgid "Sobre mí"

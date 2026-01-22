@@ -31,21 +31,6 @@
             </li>
             {% endfor %}
           </ul>
-
-          <div class="d-flex btn-group-retro">
-            <a
-              href="?sub_cat={{ sub_cat_actual|default:'' }}&orden=fecha"
-              class="btn btn-retro {% if orden_actual != 'alfabetico' %}active-retro{% endif %}"
-            >
-              {% trans "Más recientes" %}
-            </a>
-            <a
-              href="?sub_cat={{ sub_cat_actual|default:'' }}&orden=alfabetico"
-              class="btn btn-retro {% if orden_actual == 'alfabetico' %}active-retro{% endif %}"
-            >
-              {% trans "A-Z" %}
-            </a>
-          </div>
         </div>
       </div>
       {% for proyecto in proyectos %}

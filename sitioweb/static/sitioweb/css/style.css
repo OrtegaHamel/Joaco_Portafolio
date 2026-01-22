@@ -55,20 +55,16 @@ span.text-warning.small {
 }
 
 /* ==========================================================================
-   3. NAVBAR (RESPONSIVO)
+   3. NAVBAR (RESPONSIVO) - CORREGIDO
    ========================================================================== */
 .navbar {
   background-color: transparent !important;
   font-family: "Jersey 10", sans-serif;
-  /* Escala dinámicamente entre 1.2rem y 2rem */
   font-size: clamp(1.2rem, 2vw, 2rem); 
   padding: 1rem 0;
 }
 
-/* Eliminar posibles paddings que desalineen el navbar */
 .navbar .container {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
     padding-top: 0 !important;
 }
 
@@ -80,20 +76,43 @@ span.text-warning.small {
   white-space: nowrap;
 }
 
-.navbar-brand:hover {
-  opacity: 0.8;
-}
-
+/* Enlaces generales (Blancos por defecto) */
 .navbar .nav-link {
   color: white !important;
   font-size: clamp(0.9rem, 1.5vw, 1.5rem);
   white-space: nowrap;
-  transition: color 0.3s ease; /* Transición suave igual que el footer */
+  transition: all 0.3s ease;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
-/* EFECTO HOVER: Igual que el footer */
+/* EFECTO HOVER para los links blancos */
 .navbar .nav-link:hover {
-  color: #ffd966 !important; /* El amarillo que usa el cliente */
+    color: #ffd966 !important;
+    opacity: 0.8;
+}
+
+/* SELECTOR DE IDIOMA: Forzamos el amarillo SIEMPRE */
+/* Lo ponemos al final para que sea la regla definitiva */
+.navbar .nav-link.idioma-actual,
+.navbar .nav-link.idioma-actual::after {
+    color: #ffd966 !important;
+    opacity: 1 !important;
+}
+
+.navbar .nav-link.idioma-actual:hover {
+    opacity: 0.8 !important;
+}
+
+.dropdown-toggle::after {
+    display: inline-block;
+    margin-left: 0.4em;
+    vertical-align: 0.15em;
+}
+
+.dropdown-menu-dark {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: transparent; /* Cambiado de transparent para que sea legible el menú */
 }
 
 
@@ -181,35 +200,12 @@ footer .nav-link:hover {
   box-shadow: 4px 4px 0px #2a5a16; 
 }
 
-/* Botones de Orden (A-Z / Recientes) */
-.btn-retro {
-  font-family: "Jersey 10", sans-serif;
-  text-transform: uppercase;
-  border-radius: 0 !important;
-  border: 2px solid #ffd966 !important;
-  background-color: transparent;
-  color: #ffd966;
-  padding: 5px 12px;
-  font-size: clamp(0.8rem, 1vw, 1.1rem);
-  image-rendering: pixelated;
-  white-space: nowrap;
-}
-
-.btn-retro.active-retro {
-  background-color: #ffd966 !important;
-  color: #38761d !important;
-  box-shadow: 3px 3px 0px #2a5a16;
-}
-
-.btn-retro:hover {
-  background-color: rgba(255, 217, 102, 0.2);
-  color: #ffd966;
-}
 
 /* ==========================================================================
-   6. MEDIA QUERIES (AJUSTES FINALES MÓVIL)
+   6. MEDIA QUERIES 
    ========================================================================== */
-@media (max-width: 768px) {
+
+   @media (max-width: 768px) {
   /* Barra de filtros */
   .d-flex.flex-column.flex-md-row {
     gap: 20px !important;
@@ -232,13 +228,24 @@ footer .nav-link:hover {
   .navbar .container, 
   footer .container {
     flex-direction: column !important;
+    align-items: flex-start !important;
     gap: 15px;
   }
 
   .navbar-nav {
     flex-direction: row !important;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start !important;
     gap: 15px !important;
   }
+
+  footer .navbar-nav {
+        justify-content: flex-start !important;
+        flex-wrap: wrap;
+    }
+
+  .idioma-actual.dropdown-toggle {
+        padding: 10px !important; /* Área de contacto más grande para el dedo */
+        margin-right: -10px; /* Compensa el padding para no comer espacio */
+    }
 }
