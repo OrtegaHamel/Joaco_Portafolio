@@ -28,10 +28,10 @@ def categoria_detalle(request, slug):
     if orden == 'alfabetico':
         proyectos = proyectos.order_by('nombre')
     elif orden == 'fecha':
-        proyectos = proyectos.order_by('-fecha_estreno')
+        proyectos = proyectos.order_by('-estreno_anio')
     else:
         # Orden por defecto: los más nuevos primero
-        proyectos = proyectos.order_by('-fecha_estreno')
+        proyectos = proyectos.order_by('-estreno_anio')
     
     # 5. CONTEXTO
     context = {

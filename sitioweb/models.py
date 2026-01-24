@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.core.validators import MaxValueValidator, MinValueValidator
+import datetime
 
 class Categoria(models.Model):
     # Aquí irán: Realizador, Director de Foto, Colorista
@@ -28,10 +30,19 @@ class Proyecto(models.Model):
     ficha_tecnica = models.TextField(blank=True, null=True)
     descripcion = models.TextField(blank=True, null=True) # Opcional
     miniatura = models.ImageField(upload_to='proyectos/miniaturas/')
-    fecha_estreno = models.DateField(null=True, blank=True)
+    estreno_anio = models.PositiveIntegerField(
+        verbose_name="Año de estreno",
+        validators=[
+            MinValueValidator(1900), 
+            MaxValueValidator(datetime.date.today().year + 5)
+        ],
+        help_text="Ingrese el año en formato YYYY",
+        null=True,
+        blank=True
+    )
 
     class Meta:
-        ordering = ['-fecha_estreno'] # Orden por defecto: más nuevos primero
+        ordering = ['-estreno_anio'] # Orden por defecto: más nuevos primero
 
     def __str__(self):
         return f"{self.nombre} - {self.categoria.nombre}"

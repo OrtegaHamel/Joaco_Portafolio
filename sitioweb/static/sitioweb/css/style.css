@@ -5,6 +5,10 @@ html, body {
   height: 100%;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
   /* Reemplazamos el color sólido por la imagen */
   background-image: url("../img/tile3.png");
@@ -115,6 +119,29 @@ span.text-warning.small {
     background-color: transparent; /* Cambiado de transparent para que sea legible el menú */
 }
 
+/* Estilos específicos para el link "Sobre Mí" en mobile */
+.nav-sm {
+    font-size: 0.8rem !important; /* Más pequeño que el estándar */
+    letter-spacing: 0px;        /* Reduce el espacio entre letras */
+}
+
+@media (max-width: 576px) {
+    /* Reduce el espacio entre todos los links del navbar en móviles muy pequeños */
+    .navbar-nav.gap-3 {
+        gap: 0.5rem !important; 
+    }
+    
+    .navbar .nav-link {
+        font-size: 0.75rem; /* Achica un poco las categorías (Realizador, etc) */
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .navbar-brand {
+        font-size: 0.9rem;
+    }
+}
+
 
 /* ==========================================================================
    4. FOOTER (RESPONSIVO)
@@ -205,47 +232,231 @@ footer .nav-link:hover {
    6. MEDIA QUERIES 
    ========================================================================== */
 
-   @media (max-width: 768px) {
-  /* Barra de filtros */
-  .d-flex.flex-column.flex-md-row {
-    gap: 20px !important;
-  }
-
+@media (max-width: 768px) {
+  /* --- Ajustes de Subcategorías (Pills) --- */
   .custom-pills {
     justify-content: center;
     width: 100%;
-    overflow-x: auto;
-    padding-bottom: 10px;
+    gap: 5px; 
   }
 
-  .btn-group-retro {
+  .custom-pills .nav-item {
+    display: flex;
     justify-content: center;
-    width: 100%;
-    gap: 10px;
   }
 
-  /* Navbar y Footer apilados */
-  .navbar .container, 
-  footer .container {
+  /* El botón TODOS ahora ocupa todo el ancho para quedar arriba solo */
+  /* Usamos una clase específica para no romper el desktop */
+  .custom-pills .nav-item.w-100 {
+    margin-bottom: 12px;
+    flex: 0 0 100%; /* Fuerza el ancho total en móvil */
+  }
+
+  .custom-pills .nav-link {
+    font-size: 0.75rem !important; 
+    padding: 0.3rem 0.5rem !important;
+    width: fit-content !important; 
+    display: inline-block;
+  }
+
+  .custom-pills .nav-link.active {
+    background-color: #ffd966 !important;
+    color: black !important;
+  }
+
+  .d-flex.flex-column.flex-md-row { gap: 20px !important; }
+  .btn-group-retro { justify-content: center; width: 100%; gap: 10px; }
+  .navbar .container, footer .container {
     flex-direction: column !important;
     align-items: flex-start !important;
     gap: 15px;
   }
-
   .navbar-nav {
     flex-direction: row !important;
     flex-wrap: wrap;
     justify-content: flex-start !important;
     gap: 15px !important;
   }
+  footer .navbar-nav { justify-content: flex-start !important; flex-wrap: wrap; }
+  .idioma-actual.dropdown-toggle { padding: 10px !important; margin-right: -10px; }
+}
 
-  footer .navbar-nav {
-        justify-content: flex-start !important;
-        flex-wrap: wrap;
+/* --- Ajuste para ESCRITORIO --- */
+@media (min-width: 769px) {
+  /* ESTA REGLA ES LA CLAVE: Anula el ancho total del botón TODOS */
+  .custom-pills .nav-item.w-100 {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    margin-bottom: 0 !important;
+  }
+
+  .custom-pills .nav-link {
+    width: auto !important; 
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+}
+
+
+/* ==========================================================================
+   7. PROYECTOS (LISTADO)
+   ========================================================================== */
+
+/* Estilo de los filtros (Pills) */
+.custom-pills .nav-link {
+    color: white !important;
+    background-color: transparent;
+    padding: 0.5rem 1rem;
+    width: fit-content;
+    transition: all 0.3s ease;
+    font-family: "Jersey 10", sans-serif;
+}
+
+.custom-pills .nav-link.active {
+    background-color: #ffd966 !important;
+    color: black !important;
+}
+
+/* Tarjetas de Proyecto */
+.project-card {
+    cursor: pointer;
+    background-color: transparent !important; 
+}
+
+.project-card img {
+    transition: all 0.4s ease;
+    display: block;
+    z-index: 1;
+}
+
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent !important; /* Un poco de fondo ayuda a leer */
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 2;
+}
+
+.proyecto-anio {
+    color: #ffffff !important; /* Blanco puro */
+    font-family: 'Jersey 10', sans-serif;
+    font-size: 1.2rem;
+    margin: 0;
+    line-height: 1;
+    opacity: 1; /* Sin transparencia para que resalte */
+    letter-spacing: 1px;
+}
+
+/* Ajuste para que el título amarillo y el año blanco no estén pegados */
+.project-text-box h5 {
+    text-align: center;      /* Centra el texto dentro de la caja */
+    display: flex;
+    flex-direction: column;  /* Alinea los elementos en vertical */
+    align-items: center;     /* Centra los elementos hijos horizontalmente */
+    margin: 0 auto;
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+.project-card:hover img {
+    opacity: 0; 
+    transform: scale(1.05);
+}
+
+.project-overlay h5 {
+    /* Aumentamos de tamaño (antes era el estándar de h5) */
+    font-size: 1.8rem !important; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+    margin-bottom: 15px !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.tagline-preview {
+    font-family: "Jersey 10", sans-serif;
+    /* Aumentamos el tagline (estaba en 1rem) */
+    font-size: 1.3rem !important; 
+    line-height: 1.3;
+    color: #ffd966 !important;
+    text-align: center;
+    max-width: 100%; /* Evita que el texto toque los bordes de la tarjeta */
+}
+
+/* --- COMPORTAMIENTO PARA MÓVIL / TÁCTIL --- */
+@media (max-width: 768px), (hover: none) {
+    /* 1. Hacemos el overlay siempre visible */
+    .project-overlay {
+        opacity: 1 !important;
+        /* Fondo semi-transparente para que el texto resalte sobre la imagen */
+        background-color: rgba(0, 0, 0, 0.5) !important; 
     }
 
-  .idioma-actual.dropdown-toggle {
-        padding: 10px !important; /* Área de contacto más grande para el dedo */
-        margin-right: -10px; /* Compensa el padding para no comer espacio */
+    /* 2. La imagen no desaparece, pero se queda fija */
+    .project-card img {
+        opacity: 0.6 !important; /* Oscurecemos la imagen para legibilidad */
+        transform: scale(1) !important; /* Quitamos el zoom para no distraer */
+    }
+
+    /* 3. Ajuste de tamaño de texto para móviles (más compacto) */
+    .project-overlay h5 {
+        font-size: 1.3rem !important;
+        margin-bottom: 8px !important;
+    }
+
+    .tagline-preview {
+        font-size: 0.9rem !important;
     }
 }
+
+/* --- MANTENEMOS EL EFECTO HOVER SOLO EN PC --- */
+@media (min-width: 769px) and (hover: hover) {
+    .project-card:hover .project-overlay {
+        opacity: 1;
+    }
+    
+    .project-card:hover img {
+        opacity: 0;
+        transform: scale(1.1);
+    }
+}
+
+/* --- COMPORTAMIENTO EXCLUSIVO PARA MÓVIL --- */
+@media (max-width: 768px), (hover: none) {
+    /* 1. Forzamos visibilidad */
+    .project-overlay {
+        opacity: 1 !important;
+        background-color: transparent !important; /* Mantenemos el overlay general invisible */
+    }
+
+    /* 2. Creamos el rectángulo oscuro solo aquí */
+    .project-text-box {
+        background-color: rgba(0, 0, 0, 0.2) !important; /* El rectángulo negro */
+        padding: 15px !important;
+        border-radius: 2px;
+        width: fit-content;
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+    /* 3. La imagen se mantiene visible detrás del rectángulo */
+    .project-card img {
+        opacity: 0.8 !important; /* Un poco atenuada para que el negro destaque */
+        transform: scale(1) !important; /* Sin zoom en móvil */
+    }
+}
+
+/* --- Ajuste para que en Desktop la caja no estorbe --- */
+@media (min-width: 769px) {
+    .project-text-box {
+        background-color: transparent;
+        padding: 0;
+    }
+}
+
+

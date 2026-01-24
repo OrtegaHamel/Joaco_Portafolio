@@ -19,9 +19,8 @@
             <span class="hover-label">{% trans "Sobre mí" %}</span>
         </a>
 
-        <a href="https://substack.com/@gordinirojo" target="_blank" class="obj-home btn-blog">
-            <img src="{% static 'sitioweb/img/blog.png' %}" alt="Blog">
-            <span class="hover-label">{% trans "Blog" %}</span>
+        <a href="{% url 'about_me' %}" class="obj-home btn-nombre">
+            <img src="{% static 'sitioweb/img/nombre.png' %}" alt="Joaquín Fernández">
         </a>
 
         <div class="mesa-group">
@@ -70,15 +69,15 @@
     /* POSICIÓN DE JOACO (A la izquierda) */
     .joaco-main {
         width: 38%;
-        left: 20%;
+        left: 12%;
         bottom: 25%;
     }
 
-    /* POSICIÓN DEL BLOG (Arriba a la derecha) */
-    .btn-blog {
-        width: 28%;
-        right: 9%;
-        top: -12%;
+    /* POSICIÓN DEL NOMBRE (Arriba a la derecha) */
+    .btn-nombre {
+        width: 50%;
+        right: 4%;
+        top: -30%;
     }
 
     /* GRUPO MESA */
@@ -117,9 +116,8 @@
         filter: brightness(1.2);
     }
 
-    /* --- HOVER BLOG (Movimiento hacia arriba como la mesa) --- */
-    .btn-blog:hover {
-        transform: translateY(-15px);
+    /* --- HOVER NOMBRE  --- */
+    .btn-nombre:hover {
         filter: brightness(1.2);
     }
 
@@ -131,7 +129,7 @@
 
     /* --- REGLA PARA LAS ETIQUETAS (Asegura que se vean en todos) --- */
     .joaco-main:hover .hover-label, 
-    .btn-blog:hover .hover-label, 
+     .hover-label, 
     .obj-mesa:hover .hover-label { 
         opacity: 1; 
     }

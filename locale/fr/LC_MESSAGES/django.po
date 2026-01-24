@@ -10,13 +10,16 @@ msgstr "Portfolio"
 msgid "HOME"
 msgstr "HOME"
 
+msgid "SOBRE MÍ"
+msgstr "À PROPOS"
+
 msgid "REALIZADOR"
 msgstr "RÉALISATEUR"
 
 msgid "POSTPRODUCTOR"
 msgstr "POST-PRODUCTEUR"
 
-msgid "DIRECTOR DE FOTO"
+msgid "DIRECTOR DE FOTOGRAFÍA"
 msgstr "CHEF OP"
 
 msgid "Sobre mí"
