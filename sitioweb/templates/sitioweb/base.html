@@ -21,19 +21,14 @@
         <div class="container px-2 px-lg-3">
             <div class="d-flex align-items-center w-100">
                 
-                <div class="d-flex align-items-center {% if request.resolver_match.url_name == 'home' %}d-md-none{% endif %}">
-                    
-                    {% if request.resolver_match.url_name == 'home' %}
-                        <a class="navbar-brand me-4 nav-sm" href="{% url 'about_me' %}">{% trans "SOBRE MÍ" %}</a>
-                    {% else %}
-                        <a class="navbar-brand me-4" href="{% url 'home' %}">{% trans "HOME" %}</a>
-                    {% endif %}
-
+                <div class="d-flex align-items-center {% if request.resolver_match.url_name == 'home' %}d-none{% else %}d-flex{% endif %}">
+                    <a class="navbar-brand me-4" href="{% url 'home' %}">{% trans "HOME" %}</a>
                     <div class="navbar-nav d-flex flex-row gap-3">
                         <a class="nav-link text-white text-uppercase" href="{% url 'categoria_detalle' 'realizador' %}">{% trans "REALIZADOR" %}</a>
                         <a class="nav-link text-white text-uppercase" href="{% url 'categoria_detalle' 'postproductor' %}">{% trans "POSTPRODUCTOR" %}</a>
                         <a class="nav-link text-white text-uppercase" href="{% url 'categoria_detalle' 'director-de-fotografia' %}">
                             {% get_current_language as LANGUAGE_CODE %}
+                            
                             {% if LANGUAGE_CODE == 'es' %}
                                 {% trans "DIRECTOR DE" %} 
                                 <span class="d-md-none">FOTO</span>
@@ -48,11 +43,8 @@
                 <div class="ms-auto">
                     <div class="nav-item dropdown">
                         {% get_current_language as LANGUAGE_CODE %}
-                        {% get_available_languages as LANGUAGES %}
-                        
-                        <a class="nav-link dropdown-toggle text-warning p-0 idioma-actual" 
-                        href="#" id="langDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span class="d-none d-md-inline">{{ LANGUAGE_CODE|upper }}</span>
+                        {% get_available_languages as LANGUAGES %} <a class="nav-link dropdown-toggle text-warning p-0" href="#" id="langDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-family: 'Jersey 10', sans-serif;">
+                            {{ LANGUAGE_CODE|upper }}
                         </a>
                         
                         <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end shadow" aria-labelledby="langDropdown">

@@ -9,10 +9,8 @@
         <a href="{% url 'about_me' %}" class="obj-home joaco-main text-decoration-none">
             <div class="joaco-head-container">
                 <div class="eyes-container">
-                    <div class="eye">
-                        <div class="pupil"></div></div>
-                    <div class="eye">
-                        <div class="pupil"></div></div>
+                    <div class="eye"><div class="pupil"></div></div>
+                    <div class="eye"><div class="pupil"></div></div>
                 </div>
                 <img src="{% static 'sitioweb/img/Joaco_blind.png' %}" class="head-img">
             </div>
@@ -41,17 +39,39 @@
                 <span class="hover-label">{% trans "Director de Fotografía" %}</span>
             </a>
         </div>
+    </div>
 
+    <div class="home-menu-mobile d-md-none">
+        <div class="menu-categories">
+            <a href="{% url 'categoria_detalle' 'realizador' %}">{% trans "REALIZADOR" %}</a>
+            <a href="{% url 'categoria_detalle' 'postproductor' %}">{% trans "POSTPRODUCTOR" %}</a>
+            <a class="nav-link text-white text-uppercase" href="{% url 'categoria_detalle' 'director-de-fotografia' %}">
+                {% get_current_language as LANGUAGE_CODE %}
+                            
+                {% if LANGUAGE_CODE == 'es' %}
+                {% trans "DIRECTOR DE" %} 
+                <span class="d-md-none">FOTO</span>
+                <span class="d-none d-md-inline">FOTOGRAFÍA</span>
+                {% else %}
+                {% trans "DIRECTOR DE FOTOGRAFÍA" %}
+                {% endif %}
+            </a>
+        </div>
+        <div class="menu-about">
+            <a href="{% url 'about_me' %}">{% trans "SOBRE MÍ" %}</a>
+        </div>
     </div>
 </div>
 
 <style>
+    /* ESTILOS GLOBALES Y ESCENA */
     body { background-color: #38761d !important; margin: 0; overflow: hidden; }
 
     .home-scene {
         width: 100%;
-        height: 90vh;
+        height: 100vh;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
     }
@@ -61,78 +81,25 @@
         width: 95%;
         max-width: 1000px;
         aspect-ratio: 16 / 9; 
-        margin-top: 60px;
     }
 
+    /* ELEMENTOS DE LA ILUSTRACIÓN */
     .obj-home { position: absolute; transition: all 0.3s ease; z-index: 1; }
+    .joaco-main { width: 38%; left: 12%; bottom: 25%; }
+    .btn-nombre { width: 50%; right: 4%; top: -30%; }
 
-    /* POSICIÓN DE JOACO (A la izquierda) */
-    .joaco-main {
-        width: 38%;
-        left: 12%;
-        bottom: 25%;
-    }
-
-    /* POSICIÓN DEL NOMBRE (Arriba a la derecha) */
-    .btn-nombre {
-        width: 50%;
-        right: 4%;
-        top: -30%;
-    }
-
-    /* GRUPO MESA */
-    .mesa-group {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        z-index: 2;
-    }
-
+    .mesa-group { position: absolute; bottom: 0; width: 100%; z-index: 2; }
     .mesa-img { width: 100%; display: block; }
 
-    /* OBJETOS SOBRE LA MESA (Control total aquí) */
     .obj-mesa { position: absolute; transition: all 0.3s ease; z-index: 3; }
+    .cono { width: 25%; left: 7%; top: -25%; }
+    .consola { width: 33%; left: 33%; top: -10%; }
+    .camara { width: 27%; right: 7%; top: -28%; }
 
-    .cono {
-        width: 25%;
-        left: 7%;
-        top: -25%; 
-    }
-
-    .consola {
-        width: 33%;
-        left: 33%;
-        top: -10%;
-    }
-
-    .camara {
-        width: 27%;
-        right: 7%;
-        top: -28%;
-    }
-
-    /* --- HOVER JOACO  --- */
-    .joaco-main:hover {
-        filter: brightness(1.2);
-    }
-
-    /* --- HOVER NOMBRE  --- */
-    .btn-nombre:hover {
-        filter: brightness(1.2);
-    }
-
-    /* --- HOVER OBJETOS MESA (Movimiento hacia arriba) --- */
-    .obj-mesa:hover {
-        transform: translateY(-10px);
-        filter: brightness(1.2);
-    }
-
-    /* --- REGLA PARA LAS ETIQUETAS (Asegura que se vean en todos) --- */
-    .joaco-main:hover .hover-label, 
-     .hover-label, 
-    .obj-mesa:hover .hover-label { 
-        opacity: 1; 
-    }
+    /* HOVERS Y ETIQUETAS */
+    .joaco-main:hover, .btn-nombre:hover, .obj-mesa:hover { filter: brightness(1.2); }
+    .obj-mesa:hover { transform: translateY(-10px); }
+    .joaco-main:hover .hover-label, .obj-mesa:hover .hover-label { opacity: 1; }
 
     .hover-label {
         position: absolute;
@@ -144,102 +111,92 @@
         padding: 4px 10px;
         font-size: 1rem;
         font-family: "Jersey 10", sans-serif;
-        font-weight: 400;
-        font-style: normal;
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.3s;
         white-space: nowrap;
     }
 
-
-    .joaco-head-container {
-        position: relative;
-        width: 100%; /* Joaco vuelve a su tamaño natural según su contenedor padre */
-        display: inline-block;
-    }
-
-    .head-img {
-        position: relative;
-        z-index: 1; /* Encima de las pupilas */
-        height: auto;
-        width: 100%;
-    }
-
-    /* Contenedor de las órbitas */
+    /* OJOS Y CABEZA */
+    .joaco-head-container { position: relative; width: 100%; display: inline-block; }
+    .head-img { position: relative; z-index: 1; height: auto; width: 100%; }
+    
     .eyes-container {
         position: absolute;
-        top: 13%; 
-        left: 41%; /* Pequeño ajuste para centrar mejor */
-        width: 21%;  /* Reducimos un poco el ancho total */
-        height: 18%; /* Cambiamos px por % del alto de la cabeza */
-        display: flex;
-        justify-content: space-between; /* Mejor que around para órbitas fijas */
-        z-index: 999;
-        pointer-events: none;
+        top: 13%; left: 41%; width: 21%; height: 18%;
+        display: flex; justify-content: space-between;
+        z-index: 999; pointer-events: none;
     }
 
     .eye {
-        width: 30%; /* El ojo ahora es el 35% del contenedor de ojos */
-        aspect-ratio: 1 / 1; /* Mantiene el círculo perfecto siempre */
-        height: auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        overflow: hidden;
-        border-radius: 50%; 
+        width: 30%; aspect-ratio: 1 / 1;
+        display: flex; align-items: center; justify-content: center;
+        position: relative; overflow: hidden; border-radius: 50%; 
     }
 
     .pupil {
-        width: 40%; /* La pupila es el 40% del ojo */
-        aspect-ratio: 1 / 1;
-        height: auto;
+        width: 40%; aspect-ratio: 1 / 1;
         background-color: black !important; 
         background-image: url("{% static 'sitioweb/img/Joaco_ojos.png' %}"); 
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
-        border-radius: 50%;
-        position: absolute; /* Cambiado a absolute */
-        top: 27.5%; /* Centrado inicial ( (100-45)/2 ) */
-        left: 27.5%;
+        background-size: contain; background-repeat: no-repeat; background-position: center;
+        border-radius: 2%; position: absolute; top: 27.5%; left: 27.5%;
         transition: transform 0.1s ease-out;
     }
 
-    
+    /* --- MENÚ MOBILE (Simulando Navbar Escritorio) --- */
+    .home-menu-mobile {
+        text-align: center;
+        margin-top: 15px;
+        font-family: "Jersey 10", sans-serif;
+        z-index: 100;
+    }
+
+    .menu-categories {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 5px;
+    }
+
+    .menu-categories a {
+        color: white;
+        text-decoration: none;
+        font-size: 1rem;
+        text-transform: uppercase;
+    }
+
+    .menu-about a {
+        color: #ffd966;
+        text-decoration: none;
+        font-size: 1.3rem;
+        text-transform: uppercase;
+    }
 
     img { width: 100%; height: auto; }
+
+    /* RESPONSIVE AJUSTES */
+    @media (max-width: 767px) {
+        .home-scene { justify-content: flex-start; padding-top: 60px; }
+        .canvas { width: 98%; }
+    }
 </style>
 
 <script>
-   document.addEventListener('mousemove', (e) => {
+    document.addEventListener('mousemove', (e) => {
         const container = document.querySelector('.eyes-container');
         const pupils = document.querySelectorAll('.pupil');
-        
         if (!container) return;
-
-        // 1. Calculamos el centro del contenedor de los ojos (punto de referencia único)
         const rect = container.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
-
-        // 2. Calculamos el ángulo hacia el ratón desde el centro de la cara
         const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
-
-        // 3. Calculamos una distancia de movimiento que dependa del tamaño actual del ojo
-        // Usamos el ancho de un ojo para que sea proporcional
         const eyeWidth = document.querySelector('.eye').offsetWidth;
-        const maxDistance = eyeWidth * 0.25; // 25% del ancho del ojo como radio de movimiento
-
+        const maxDistance = eyeWidth * 0.25; 
         const moveX = Math.cos(angle) * maxDistance;
         const moveY = Math.sin(angle) * maxDistance;
-
-        // 4. Aplicamos el MISMO movimiento a ambas pupilas
         pupils.forEach(pupil => {
             pupil.style.transform = `translate(${moveX}px, ${moveY}px)`;
         });
     });
 </script>
-
 {% endblock %}
