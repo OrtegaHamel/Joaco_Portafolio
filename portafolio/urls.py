@@ -13,7 +13,7 @@ urlpatterns = [
 urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('', include('sitioweb.urls')),
-    prefix_default_language=True
+    prefix_default_language=False
 )
 
 # 3. Archivos estáticos

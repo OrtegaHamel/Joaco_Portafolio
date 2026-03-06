@@ -22,7 +22,7 @@ if not SECRET_KEY:
 # DEBUG = os.getenv('DEBUG') == 'False'
 DEBUG = True
 
-ALLOWED_HOSTS = ['joaco.fr', 'www.joaco.fr', '64.20.34.166']
+ALLOWED_HOSTS = ['joaco.fr', 'www.joaco.fr', '64.20.34.166', '127.0.0.1', 'localhost']
 
 
 # Application definition

@@ -51,7 +51,7 @@
                             {% get_current_language as CURRENT_LANG %}
                             <li>
                                 <a class="dropdown-item {% if CURRENT_LANG == 'fr' %}active text-warning{% endif %}"
-                                    href="/fr{{ request.path|slice:'3:' }}">Français</a>
+                                    href="{{ request.path|slice:'3:' |default:'/' }}">Français</a>
                             </li>
                             <li>
                                 <a class="dropdown-item {% if CURRENT_LANG == 'es' %}active text-warning{% endif %}"
