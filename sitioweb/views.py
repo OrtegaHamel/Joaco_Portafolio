@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404 #Bedford_or_404
 from .models import Categoria, Proyecto, Perfil
 from django.utils.translation import gettext_lazy as _
+from django.utils import translation
 
 def home(request):
     # Esta vista solo renderiza la ilustración inicial
@@ -32,6 +33,10 @@ def categoria_detalle(request, slug):
     else:
         # Orden por defecto: los más nuevos primero
         proyectos = proyectos.order_by('-estreno_anio')
+
+    sub_cats_traducidas = [
+        (valor, _(etiqueta)) for valor, etiqueta in Proyecto.SUB_CATEGORIAS
+    ]
     
     # 5. CONTEXTO
     context = {
@@ -39,7 +44,7 @@ def categoria_detalle(request, slug):
         'proyectos': proyectos,
         'sub_cat_actual': sub_cat,
         'orden_actual': orden,
-        'sub_categorias': Proyecto.SUB_CATEGORIAS, # Para armar el menú en el HTML
+        'sub_categorias': sub_cats_traducidas,
     }
     return render(request, 'sitioweb/categoria_listado.html', context)
 

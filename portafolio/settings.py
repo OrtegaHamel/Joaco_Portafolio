@@ -1,7 +1,9 @@
+from django.utils.translation import gettext_lazy as _
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-from django.utils.translation import gettext_lazy as _
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,11 +12,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
-# Cargar el archivo .env
-load_dotenv()
+ENV_PATH = BASE_DIR / '.env'
+load_dotenv(dotenv_path=ENV_PATH)
 
 SECRET_KEY = os.getenv('SECRET_KEY')
-DEBUG = os.getenv('DEBUG') == 'False'
+# Asegurémonos de que si falla el .env, no se rompa todo
+if not SECRET_KEY:
+    SECRET_KEY = 'clave-temporal-de-emergencia-123'
+# DEBUG = os.getenv('DEBUG') == 'False'
+DEBUG = True
 
 ALLOWED_HOSTS = ['joaco.fr', 'www.joaco.fr', '64.20.34.166']
 
@@ -52,6 +58,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.i18n',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -100,24 +107,28 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
+
 LANGUAGE_CODE = 'fr'
 
 LANGUAGES = [
+    ('fr', _('Français')),
     ('es', _('Español')),
     ('en', _('English')),
-    ('fr', _('Français')),
 ]
 
-MODELTRANSLATION_DEFAULT_LANGUAGE = 'es'
-MODELTRANSLATION_FALLBACK_LANGUAGES = ('es', 'en', 'fr')
-
-TIME_ZONE = 'UTC'
-
+# Esto obliga a que la URL mande y no se mezcle con cookies viejas
 USE_I18N = True
+USE_L10N = True
 
-LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')] # Aquí se guardarán textos fijos traducibles
+LANGUAGE_COOKIE_NAME = 'joaco_fr_final_fixed' # Cambiamos el nombre para ignorar cookies viejas
+LANGUAGE_SAVE_ON_SESSION = False
+LOCALE_MIDDLEWARE_CHOOSES_DEFAULT = False 
 
-USE_TZ = True
+# Configuración de Modeltranslation
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'fr'
+MODELTRANSLATION_FALLBACK_LANGUAGES = ('fr', 'es', 'en')
+
+LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 
 
 # Static files (CSS, JavaScript, Images)

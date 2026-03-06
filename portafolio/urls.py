@@ -2,20 +2,20 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.conf.urls.i18n import i18n_patterns #Permite configuración para los idiomas
+from django.conf.urls.i18n import i18n_patterns 
 
-# 1. Rutas que NO llevan prefijo de idioma (Admin e idioma interno)
+# 1. Rutas sin prefijo
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('i18n/', include('django.conf.urls.i18n')), # Esto permite que los botones de idioma funcionen
+    path('i18n/', include('django.conf.urls.i18n')),
 ]
 
-# 2. Rutas que SÍ llevan prefijo (/es/, /en/, /fr/)
+# 2. Rutas con prefijo
 urlpatterns += i18n_patterns(
+    path('admin/', admin.site.urls),
     path('', include('sitioweb.urls')),
-    # Si en el futuro agregas más apps que se traduzcan, van aquí
+    prefix_default_language=True
 )
 
-# 3. Configuración para ver las fotos en desarrollo
+# 3. Archivos estáticos
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

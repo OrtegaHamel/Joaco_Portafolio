@@ -1,0 +1,80 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es\n"
+
+msgid "Portafolio"
+msgstr "Portafolio"
+
+msgid "HOME"
+msgstr "HOME"
+
+msgid "SOBRE MÍ"
+msgstr "SOBRE MÍ"
+
+msgid "REALIZADOR"
+msgstr "REALIZADOR"
+
+msgid "POSTPRODUCTOR"
+msgstr "POSTPRODUCTOR"
+
+msgid "DIRECTOR DE FOTOGRAFÍA"
+msgstr "DIRECTOR DE FOTOGRAFÍA"
+
+msgid "Sobre mí"
+msgstr "Sobre mí"
+
+msgid "CONTACTO"
+msgstr "Contacto"
+
+msgid "Blog"
+msgstr "Blog"
+
+msgid "Realizador"
+msgstr "Realizador"
+
+msgid "Postproductor"
+msgstr "Post-productor"
+
+msgid "Director de Fotografía"
+msgstr "Director de Fotografía"
+
+msgid "Ficción"
+msgstr "Ficción"
+
+msgid "Documental"
+msgstr "Documental"
+
+msgid "Videoclip"
+msgstr "Videoclip"
+
+msgid "Experimental"
+msgstr "Experimental"
+
+msgid "Todos"
+msgstr "Todos"
+
+msgid "Más recientes"
+msgstr "Más recientes"
+
+msgid "No hay proyectos cargados aún."
+msgstr "No hay proyectos cargados aún."
+
+msgid "Capturas"
+msgstr "Capturas"
+
+msgid "Imágenes"
+msgstr "Imágenes"
+
+msgid "Sin foto de perfil"
+msgstr "Sin foto de perfil"
+
+msgid "Joaco Portafolio"
+msgstr "Joaco Portafolio"
+
+msgid "Desarrollado por"
+msgstr "Desarrollado por"
+
+msgid "Descargar CV"
+msgstr "Descargar CV"

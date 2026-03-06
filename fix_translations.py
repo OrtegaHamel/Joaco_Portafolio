@@ -4,7 +4,8 @@ import os
 # Rutas a tus archivos manuales
 files = [
     'locale/en/LC_MESSAGES/django.po',
-    'locale/fr/LC_MESSAGES/django.po'
+    'locale/fr/LC_MESSAGES/django.po',
+    'locale/es/LC_MESSAGES/django.po',
 ]
 
 for f in files:

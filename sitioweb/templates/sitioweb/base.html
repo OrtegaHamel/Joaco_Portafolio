@@ -47,18 +47,20 @@
                             {{ LANGUAGE_CODE|upper }}
                         </a>
                         
-                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end shadow" aria-labelledby="langDropdown">
-                            {% for lang in LANGUAGES %}
-                                <li>
-                                    <form action="{% url 'set_language' %}" method="post" class="m-0">
-                                        {% csrf_token %}
-                                        <input name="language" type="hidden" value="{{ lang.0 }}">
-                                        <button type="submit" class="dropdown-item {% if lang.0 == LANGUAGE_CODE %}active text-warning{% endif %}">
-                                            {{ lang.1 }}
-                                        </button>
-                                    </form>
-                                </li>
-                            {% endfor %}
+                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end shadow">
+                            {% get_current_language as CURRENT_LANG %}
+                            <li>
+                                <a class="dropdown-item {% if CURRENT_LANG == 'fr' %}active text-warning{% endif %}"
+                                    href="/fr{{ request.path|slice:'3:' }}">Français</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item {% if CURRENT_LANG == 'es' %}active text-warning{% endif %}"
+                                    href="/es{{ request.path|slice:'3:' }}">Español</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item {% if CURRENT_LANG == 'en' %}active text-warning{% endif %}"
+                                    href="/en{{ request.path|slice:'3:' }}">English</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
