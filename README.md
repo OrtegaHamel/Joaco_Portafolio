@@ -1,6 +1,6 @@
 # 🎬 Joaco Portafolio (En Desarrollo)
 
-Este es el sitio web personal y portafolio profesional de Joaco. El proyecto se encuentra actualmente en fase de **desarrollo activo**. El objetivo es crear una plataforma trilingüe dinámica para exhibir trabajos de realización, postproducción y dirección de fotografía.
+Este es el sitio web personal y portafolio profesional del realizador audiovisual Joaquín Fernández. El proyecto se encuentra actualmente en fase de **desarrollo activo**. El objetivo es crear una plataforma trilingüe dinámica para exhibir trabajos de realización, postproducción y dirección de fotografía.
 
 ---
 
@@ -10,7 +10,7 @@ Este es el sitio web personal y portafolio profesional de Joaco. El proyecto se 
 - [x] Motor de compilación de traducciones manual con `polib`.
 - [x] Diseño responsivo con Bootstrap 5.
 - [x] Gestión de seguridad mediante variables de entorno (`.env`).
-- [ ] Configuración de despliegue en servidor de producción.
+- [x] Configuración de despliegue en servidor de producción.
 
 ---
 
