@@ -1,35 +1,29 @@
-from django.shortcuts import render, get_object_or_404 #Bedford_or_404
+from django.shortcuts import render, get_object_or_404
 from .models import Categoria, Proyecto, Perfil
 from django.utils.translation import gettext_lazy as _
 from django.utils import translation
 
 def home(request):
-    # Esta vista solo renderiza la ilustración inicial
     return render(request, 'sitioweb/home.html')
 
 def categoria_detalle(request, slug):
-    # 1. Obtenemos la categoría base
+    # 1. Obtenemos la categoría base por su slug
     categoria = get_object_or_404(Categoria, slug=slug)
     
-    # 2. Filtramos los proyectos que pertenecen a esa categoría
-    proyectos = Proyecto.objects.filter(categoria=categoria)
+    # 2. FILTRO CORREGIDO: Usamos 'categorias' (plural) que es el nuevo campo en el modelo
+    proyectos = Proyecto.objects.filter(categorias=categoria)
     
     # 3. FILTRADO POR SUB-CATEGORÍA
-    # Capturamos el parámetro 'sub_cat' de la URL (ej: ?sub_cat=ficcion)
     sub_cat = request.GET.get('sub_cat')
-    valid_sub_cats = [choice[0] for choice in Proyecto.SUB_CATEGORIAS] # ['ficcion', 'documental', etc.]
+    valid_sub_cats = [choice[0] for choice in Proyecto.SUB_CATEGORIAS]
     
     if sub_cat in valid_sub_cats:
         proyectos = proyectos.filter(sub_categoria=sub_cat)
     
     # 4. ORDENAMIENTO
-    # Capturamos el parámetro 'orden' de la URL (ej: ?orden=alfabetico)
     orden = request.GET.get('orden')
-    
     if orden == 'alfabetico':
         proyectos = proyectos.order_by('nombre')
-    elif orden == 'fecha':
-        proyectos = proyectos.order_by('-estreno_anio')
     else:
         # Orden por defecto: los más nuevos primero
         proyectos = proyectos.order_by('-estreno_anio')
@@ -38,7 +32,6 @@ def categoria_detalle(request, slug):
         (valor, _(etiqueta)) for valor, etiqueta in Proyecto.SUB_CATEGORIAS
     ]
     
-    # 5. CONTEXTO
     context = {
         'categoria': categoria,
         'proyectos': proyectos,
@@ -48,10 +41,9 @@ def categoria_detalle(request, slug):
     }
     return render(request, 'sitioweb/categoria_listado.html', context)
 
-def proyecto_detalle(request, pk):
-    # pk es el ID único del proyecto
-    proyecto = get_object_or_404(Proyecto, pk=pk)
-    # Obtenemos todas las capturas relacionadas a este proyecto
+def proyecto_detalle(request, slug): # CAMBIO: Ahora recibe 'slug' en lugar de 'pk'
+    # Buscamos por slug para tener URLs bonitas
+    proyecto = get_object_or_404(Proyecto, slug=slug)
     capturas = proyecto.capturas.all() 
     
     return render(request, 'sitioweb/proyecto_detalle.html', {
@@ -60,7 +52,7 @@ def proyecto_detalle(request, pk):
     })
 
 def about_me(request):
-    perfil = Perfil.objects.first() # Trae el perfil de Joaco
+    perfil = Perfil.objects.first()
     return render(request, 'sitioweb/about.html', {
         'perfil': perfil
     })

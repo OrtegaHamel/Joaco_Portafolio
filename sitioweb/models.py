@@ -12,7 +12,7 @@ class Categoria(models.Model):
         return self.nombre
 
 class Proyecto(models.Model):
-    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name='proyectos')
+    categorias = models.ManyToManyField(Categoria, related_name='proyectos', verbose_name="Categorías")
     SUB_CATEGORIAS = [
         ('ficcion', _('Ficción')),
         ('documental', _('Documental')),
@@ -20,6 +20,7 @@ class Proyecto(models.Model):
         ('experimental', _('Experimental')),
     ]
     nombre = models.CharField(max_length=200)
+    slug = models.SlugField(unique=True, max_length=255, blank=True, null=True)
     sub_categoria = models.CharField(
         max_length=20,
         choices=SUB_CATEGORIAS,
@@ -45,7 +46,12 @@ class Proyecto(models.Model):
         ordering = ['-estreno_anio'] # Orden por defecto: más nuevos primero
 
     def __str__(self):
-        return f"{self.nombre} - {self.categoria.nombre}"
+        return self.nombre
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.nombre)
+        super().save(*args, **kwargs)
 
 class Captura(models.Model):
     # Esto permite que un Proyecto tenga "varias capturas de pantalla"

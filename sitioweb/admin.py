@@ -1,6 +1,7 @@
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin, TranslationTabularInline
 from .models import Categoria, Proyecto, Captura, VideoProyecto, Perfil, CapturaPerfil, VideoPerfil
+from django.forms import CheckboxSelectMultiple
 
 class VideoInline(admin.TabularInline):
     model = VideoProyecto
@@ -8,18 +9,31 @@ class VideoInline(admin.TabularInline):
 
 class CapturaInline(admin.TabularInline):
     model = Captura
-    extra = 3 # Te mostrará 3 espacios vacíos para subir fotos de una vez
+    extra = 3 
 
 @admin.register(Proyecto)
 class ProyectoAdmin(admin.ModelAdmin):
-    inlines = [VideoInline,CapturaInline]
-    list_display = ('nombre', 'categoria')
-    list_filter = ('categoria',)
+    inlines = [VideoInline, CapturaInline]
+    # LA COMA AL FINAL ES CLAVE AQUÍ:
+    list_display = ('nombre', 'mostrar_categorias', 'sub_categoria', 'estreno_anio')
+    list_filter = ('categorias', 'sub_categoria', 'estreno_anio')
+    filter_horizontal = ('categorias',)
+    prepopulated_fields = {'slug': ('nombre',)}
 
+    # Función para ver las categorías en la lista principal
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == "categorias":
+            kwargs["widget"] = CheckboxSelectMultiple
+        return super().formfield_for_manytomany(db_field, request, **kwargs)
+
+    def mostrar_categorias(self, obj):
+        return ", ".join([c.nombre for c in obj.categorias.all()])
+    mostrar_categorias.short_description = 'Categorías'
+
+# Registramos Categoria de forma normal
 admin.site.register(Categoria)
 
-
-# El Inline ahora permite campos traducidos
+# Configuración del Perfil
 class VideoPerfilInline(TranslationTabularInline):
     model = VideoPerfil
     extra = 1

@@ -11,25 +11,77 @@
 
         {% if proyecto.ficha_tecnica %}
             <div class="text-end mt-3 mb-4 pt-2">
-                <p class="lead text-secondary">{{ proyecto.ficha_tecnica|linebreaks }}</p>
+                <div class="lead text-secondary small">{{ proyecto.ficha_tecnica|linebreaks }}</div>
             </div>
         {% endif %}
 
-        <div class="row g-3 mb-5">
+        <div class="d-none d-md-flex row g-3 mb-5">
             {% for captura in proyecto.capturas.all %}
                 <div class="col-md-6 col-lg-4">
-                    <img src="{{ captura.imagen.url }}" class="img-fluid rounded shadow-sm" alt="Still">
+                    <div class="ratio ratio-16x9 shadow-sm rounded overflow-hidden">
+                        <img src="{{ captura.imagen.url }}" 
+                             class="img-fluid object-fit-cover rounded cursor-zoom" 
+                             alt="Still {{ proyecto.nombre }}"
+                             data-bs-toggle="modal" 
+                             data-bs-target="#galleryModal"
+                             data-bs-slide-to="{{ forloop.counter0 }}"
+                             style="cursor: pointer; transition: transform 0.3s ease;">
+                    </div>
                 </div>
             {% endfor %}
         </div>
 
+        <div class="d-md-none mb-5">
+            <div id="mobileCarousel" class="carousel slide" data-bs-ride="false">
+                <div class="carousel-inner">
+                    {% for captura in proyecto.capturas.all %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <img src="{{ captura.imagen.url }}" class="d-block w-100 rounded" alt="Still">
+                        </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#mobileCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#mobileCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="modal fade" id="galleryModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content bg-transparent border-0">
+                    <div class="modal-body p-0 position-relative">
+                        <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3 z-3" data-bs-dismiss="modal" aria-label="Close"></button>
+                        
+                        <div id="modalCarousel" class="carousel slide">
+                            <div class="carousel-inner text-center">
+                                {% for captura in proyecto.capturas.all %}
+                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                        <img src="{{ captura.imagen.url }}" class="img-fluid rounded shadow-lg" alt="Still Fullscreen">
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#modalCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#modalCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="videos-section mb-5">
             {% for video in proyecto.videos.all %}
-                <div class="mb-4">
+                <div class="mb-5">
                     {% if video.titulo_video %}
-                        <h4 class="h6 mb-2">{{ video.titulo_video }}</h4>
+                        <h4 class="h6 mb-3 text-uppercase text-secondary tracking-widest">{{ video.titulo_video }}</h4>
                     {% endif %}
-                    <div class="ratio ratio-16x9 shadow rounded overflow-hidden">
+                    <div class="ratio ratio-16x9 shadow rounded overflow-hidden bg-black">
                         <iframe src="{{ video.url_video|embed_video }}" 
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                             allowfullscreen
@@ -41,11 +93,36 @@
         </div>
 
         {% if proyecto.descripcion %}
-        <div class="mt-5 pt-4">
-            <p class="lead text-secondary">{{ proyecto.descripcion|linebreaks }}</p>
+        <div class="mt-5 pt-4 border-top border-secondary border-opacity-25">
+            <div class="col-md-8 mx-auto">
+                <div class="lead text-secondary text-center">{{ proyecto.descripcion|linebreaks }}</div>
+            </div>
         </div>
         {% endif %}
 
     </div>
 </div>
+
+<script>
+    const galleryModal = document.getElementById('galleryModal');
+    if (galleryModal) {
+        galleryModal.addEventListener('show.bs.modal', function (event) {
+            const triggerElement = event.relatedTarget; // La imagen que clickeamos
+            const slideIndex = triggerElement.getAttribute('data-bs-slide-to'); // Qué número de imagen es
+            const carouselElement = document.getElementById('modalCarousel');
+            const carousel = new bootstrap.Carousel(carouselElement);
+            carousel.to(slideIndex); // Mueve el carrusel del modal a esa imagen
+        });
+    }
+</script>
+
+<style>
+    .cursor-zoom:hover {
+        transform: scale(1.02);
+        filter: brightness(1.1);
+    }
+    .carousel-control-prev, .carousel-control-next {
+        width: 10%; /* Mejora área de click */
+    }
+</style>
 {% endblock %}

@@ -13,7 +13,7 @@
 
   <div class="row mb-5">
     <div class="col-12">
-      <div class="pb-3 border-bottom border-secondary border-opacity-25">
+      <div class="pb-3">
         <ul class="nav nav-pills custom-pills w-100 d-flex flex-wrap justify-content-center justify-content-md-start">
           <li class="nav-item w-100 w-md-auto d-flex justify-content-center justify-content-md-start">
             <a class="nav-link {% if not sub_cat_actual %}active{% endif %}" href="?orden={{ orden_actual|default:'fecha' }}">
@@ -36,7 +36,7 @@
   <div class="row g-4">
     {% for proyecto in proyectos %}
     <div class="col-sm-12 col-md-6 col-lg-4">
-      <a href="{% url 'proyecto_detalle' proyecto.pk %}" class="text-decoration-none">
+      <a href="{% url 'proyecto_detalle' proyecto.slug %}" class="text-decoration-none">
         <div class="card bg-dark border-0 project-card overflow-hidden position-relative">
           <div class="ratio ratio-16x9">
             <img src="{{ proyecto.miniatura.url }}" class="card-img object-fit-cover" alt="{{ proyecto.nombre }}" />
