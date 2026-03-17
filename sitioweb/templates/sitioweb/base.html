@@ -43,17 +43,40 @@
                         </a>
                         
                         <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end shadow">
+                            {% get_current_language as CURRENT_LANG %}
+                            
+                            {# OPCIÓN FRANCÉS #}
                             <li>
-                                <a class="dropdown-item {% if CURRENT_LANG == 'fr' %}text-warning fw-bold{% else %}text-white{% endif %}"
-                                href="{{ request.path|slice:'3:'|default:'/' }}">Français</a>
+                                {% if CURRENT_LANG == 'fr' %}
+                                    <a class="dropdown-item text-warning fw-bold" href="{{ request.path }}">Français</a>
+                                {% else %}
+                                    {# Si estamos en /es/ o /en/, quitamos los primeros 3 caracteres (/es) #}
+                                    <a class="dropdown-item text-white" href="{{ request.path|slice:'3:' }}">Français</a>
+                                {% endif %}
                             </li>
+
+                            {# OPCIÓN ESPAÑOL #}
                             <li>
-                                <a class="dropdown-item {% if CURRENT_LANG == 'es' %}text-warning fw-bold{% else %}text-white{% endif %}"
-                                href="/es{{ request.path|slice:'3:' }}">Español</a>
+                                {% if CURRENT_LANG == 'es' %}
+                                    <a class="dropdown-item text-warning fw-bold" href="{{ request.path }}">Español</a>
+                                {% elif CURRENT_LANG == 'fr' %}
+                                    {# Si estamos en la raíz (francés), solo pegamos /es al principio #}
+                                    <a class="dropdown-item text-white" href="/es{{ request.path }}">Español</a>
+                                {% else %}
+                                    {# Si estamos en inglés (/en/), cambiamos /en por /es #}
+                                    <a class="dropdown-item text-white" href="/es{{ request.path|slice:'3:' }}">Español</a>
+                                {% endif %}
                             </li>
+
+                            {# OPCIÓN INGLÉS #}
                             <li>
-                                <a class="dropdown-item {% if CURRENT_LANG == 'en' %}text-warning fw-bold{% else %}text-white{% endif %}"
-                                href="/en{{ request.path|slice:'3:' }}">English</a>
+                                {% if CURRENT_LANG == 'en' %}
+                                    <a class="dropdown-item text-warning fw-bold" href="{{ request.path }}">English</a>
+                                {% elif CURRENT_LANG == 'fr' %}
+                                    <a class="dropdown-item text-white" href="/en{{ request.path }}">English</a>
+                                {% else %}
+                                    <a class="dropdown-item text-white" href="/en{{ request.path|slice:'3:' }}">English</a>
+                                {% endif %}
                             </li>
                         </ul>
                     </div>
