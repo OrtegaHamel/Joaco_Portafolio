@@ -4,9 +4,10 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 import datetime
 
 class Categoria(models.Model):
-    # Aquí irán: Realizador, Director de Foto, Colorista
+    # Realizador, Director de Foto, Colorista
     nombre = models.CharField(max_length=100)
-    slug = models.SlugField(unique=True) # Para URLs amigables (ej: /colorista/)
+    slug = models.SlugField(unique=True) # Para URLs amigables
+    descripcion = models.TextField(blank=True, null=True, verbose_name="Descripción de la categoría")
 
     def __str__(self):
         return self.nombre

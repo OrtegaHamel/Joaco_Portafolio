@@ -10,8 +10,7 @@
         <h1 class="display-4 fw-bold mb-4 text-center text-uppercase">{{ proyecto.nombre }}</h1>
 
         {% if proyecto.ficha_tecnica %}
-            <div class="text-end mt-3 mb-4 pt-2">
-                <div class="lead text-secondary small">{{ proyecto.ficha_tecnica|linebreaks }}</div>
+            <div class="text-end mt-5 pt-4 pb-4"> <p class="lead text-secondary">{{ proyecto.ficha_tecnica|linebreaks }}</p>
             </div>
         {% endif %}
 
@@ -93,9 +92,9 @@
         </div>
 
         {% if proyecto.descripcion %}
-        <div class="mt-5 pt-4 border-top border-secondary border-opacity-25">
+        <div class="mt-5 pt-4">
             <div class="col-md-8 mx-auto">
-                <div class="lead text-secondary text-center">{{ proyecto.descripcion|linebreaks }}</div>
+                <p class="lead text-secondary text-center">{{ proyecto.descripcion|linebreaks }}</div>
             </div>
         </div>
         {% endif %}
@@ -103,26 +102,4 @@
     </div>
 </div>
 
-<script>
-    const galleryModal = document.getElementById('galleryModal');
-    if (galleryModal) {
-        galleryModal.addEventListener('show.bs.modal', function (event) {
-            const triggerElement = event.relatedTarget; // La imagen que clickeamos
-            const slideIndex = triggerElement.getAttribute('data-bs-slide-to'); // Qué número de imagen es
-            const carouselElement = document.getElementById('modalCarousel');
-            const carousel = new bootstrap.Carousel(carouselElement);
-            carousel.to(slideIndex); // Mueve el carrusel del modal a esa imagen
-        });
-    }
-</script>
-
-<style>
-    .cursor-zoom:hover {
-        transform: scale(1.02);
-        filter: brightness(1.1);
-    }
-    .carousel-control-prev, .carousel-control-next {
-        width: 10%; /* Mejora área de click */
-    }
-</style>
 {% endblock %}

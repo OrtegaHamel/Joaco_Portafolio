@@ -14,13 +14,12 @@ class CapturaInline(admin.TabularInline):
 @admin.register(Proyecto)
 class ProyectoAdmin(admin.ModelAdmin):
     inlines = [VideoInline, CapturaInline]
-    # LA COMA AL FINAL ES CLAVE AQUÍ:
+    save_on_top = True
     list_display = ('nombre', 'mostrar_categorias', 'sub_categoria', 'estreno_anio')
     list_filter = ('categorias', 'sub_categoria', 'estreno_anio')
     filter_horizontal = ('categorias',)
     prepopulated_fields = {'slug': ('nombre',)}
 
-    # Función para ver las categorías en la lista principal
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         if db_field.name == "categorias":
             kwargs["widget"] = CheckboxSelectMultiple
@@ -30,8 +29,12 @@ class ProyectoAdmin(admin.ModelAdmin):
         return ", ".join([c.nombre for c in obj.categorias.all()])
     mostrar_categorias.short_description = 'Categorías'
 
-# Registramos Categoria de forma normal
-admin.site.register(Categoria)
+# Categoria
+@admin.register(Categoria)
+class CategoriaAdmin(TranslationAdmin): # TranslationAdmin para ver los idiomas
+    save_on_top = True
+    list_display = ('nombre', 'slug')
+    prepopulated_fields = {'slug': ('nombre',)} # Esto ayuda a que el slug se escriba solo al poner el nombre
 
 # Configuración del Perfil
 class VideoPerfilInline(TranslationTabularInline):
@@ -45,3 +48,4 @@ class CapturaPerfilInline(admin.TabularInline):
 @admin.register(Perfil)
 class PerfilAdmin(TranslationAdmin):
     inlines = [VideoPerfilInline, CapturaPerfilInline]
+    save_on_top = True

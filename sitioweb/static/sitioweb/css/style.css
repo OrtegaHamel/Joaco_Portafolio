@@ -142,6 +142,21 @@ span.text-warning.small {
     }
 }
 
+/* SELECTOR DE IDIOMA: Forzamos el amarillo SIEMPRE */
+.navbar .nav-link.idioma-actual {
+    color: #ffd966 !important; /* El amarillo de tu marca */
+    opacity: 1 !important;
+}
+
+/* El triangulito del dropdown también amarillo */
+.navbar .nav-link.idioma-actual::after {
+    color: #ffd966 !important;
+}
+
+.navbar .nav-link.idioma-actual:hover {
+    opacity: 0.8 !important;
+    color: #ffd966 !important;
+}
 
 /* ==========================================================================
    4. FOOTER (RESPONSIVO)
@@ -227,6 +242,40 @@ footer .nav-link:hover {
   box-shadow: 4px 4px 0px #2a5a16; 
 }
 
+/* ==========================================================================
+   6. COMPONENTES GALERÍA Y ZOOM
+   ========================================================================== */
+
+.cursor-zoom {
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.cursor-zoom:hover {
+    transform: scale(1.02);
+    filter: brightness(1.1);
+}
+
+/* Mejora el área de clic en los carruseles */
+.carousel-control-prev, 
+.carousel-control-next {
+    width: 10% !important;
+}
+
+/* Ajuste general para iframes y ratios */
+iframe {
+    border: none;
+}
+
+.object-fit-cover {
+    object-fit: cover;
+}
+
+/* Estilo para el fondo del modal de galería */
+#galleryModal .modal-content {
+    background-color: black;
+    border: 0;
+}
 
 /* ==========================================================================
    6. MEDIA QUERIES 
@@ -436,7 +485,7 @@ footer .nav-link:hover {
 
     /* 2. Creamos el rectángulo oscuro solo aquí */
     .project-text-box {
-        background-color: rgba(0, 0, 0, 0.2) !important; /* El rectángulo negro */
+        background-color: rgba(0, 0, 0, 0.3) !important; /* El rectángulo negro */
         padding: 15px !important;
         border-radius: 2px;
         width: fit-content;
@@ -446,7 +495,7 @@ footer .nav-link:hover {
 
     /* 3. La imagen se mantiene visible detrás del rectángulo */
     .project-card img {
-        opacity: 0.8 !important; /* Un poco atenuada para que el negro destaque */
+        opacity: 1 !important; /* Un poco atenuada para que el negro destaque */
         transform: scale(1) !important; /* Sin zoom en móvil */
     }
 }
@@ -460,3 +509,15 @@ footer .nav-link:hover {
 }
 
 
+
+/* CONGELAR NOMBRE POR COMPLETO */
+.obj-home.btn-nombre, 
+.obj-home.btn-nombre:hover, 
+.obj-home.btn-nombre img, 
+.obj-home.btn-nombre:hover img {
+    transform: none !important;      /* Elimina cualquier movimiento o escala */
+    filter: none !important;         /* Elimina cambios de brillo */
+    transition: none !important;     /* Elimina el suavizado (lo hace instantáneo) */
+    -webkit-transform: none !important;
+    -ms-transform: none !important;
+}

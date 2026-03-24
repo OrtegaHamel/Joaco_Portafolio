@@ -3,7 +3,7 @@ from .models import Categoria, Proyecto, Perfil, VideoPerfil
 
 @register(Categoria)
 class CategoriaTranslationOptions(TranslationOptions):
-    fields = ('nombre',) # El slug no suele traducirse para no romper links
+    fields = ('nombre', 'descripcion') 
 
 @register(Proyecto)
 class ProyectoTranslationOptions(TranslationOptions):

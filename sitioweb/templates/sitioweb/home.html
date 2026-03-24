@@ -24,38 +24,39 @@
         <div class="mesa-group">
             <img src="{% static 'sitioweb/img/mesa.png' %}" class="mesa-img">
             
-            <a href="{% url 'categoria_detalle' 'realizador' %}" class="obj-mesa cono">
-                <img src="{% static 'sitioweb/img/Cono.png' %}">
-                <span class="hover-label">{% trans "Realizador" %}</span>
-            </a>
-            
-            <a href="{% url 'categoria_detalle' 'postproductor' %}" class="obj-mesa consola">
-                <img src="{% static 'sitioweb/img/consola.png' %}">
-                <span class="hover-label">{% trans "Postproductor" %}</span>
-            </a>
-            
-            <a href="{% url 'categoria_detalle' 'director-de-fotografia' %}" class="obj-mesa camara">
-                <img src="{% static 'sitioweb/img/camara.png' %}">
-                <span class="hover-label">{% trans "Director de Fotografía" %}</span>
-            </a>
+            {% for cat in categorias_globales %}
+                {% if cat.slug == 'realizador' %}
+                    <a href="{% url 'categoria_detalle' cat.slug %}" class="obj-mesa cono">
+                        <img src="{% static 'sitioweb/img/Cono.png' %}">
+                        <span class="hover-label">{{ cat.nombre }}</span>
+                    </a>
+                {% elif cat.slug == 'colorista' %}
+                    <a href="{% url 'categoria_detalle' cat.slug %}" class="obj-mesa consola">
+                        <img src="{% static 'sitioweb/img/consola.png' %}">
+                        <span class="hover-label">{{ cat.nombre }}</span>
+                    </a>
+                {% elif cat.slug == 'director-de-fotografia' %}
+                    <a href="{% url 'categoria_detalle' cat.slug %}" class="obj-mesa camara">
+                        <img src="{% static 'sitioweb/img/camara.png' %}">
+                        <span class="hover-label">{{ cat.nombre }}</span>
+                    </a>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 
     <div class="home-menu-mobile d-md-none">
         <div class="menu-categories">
-            <a href="{% url 'categoria_detalle' 'realizador' %}">{% trans "REALIZADOR" %}</a>
-            <a href="{% url 'categoria_detalle' 'postproductor' %}">{% trans "POSTPRODUCTOR" %}</a>
-            <a class="nav-link text-white text-uppercase" href="{% url 'categoria_detalle' 'director-de-fotografia' %}">
-                {% get_current_language as LANGUAGE_CODE %}
-                            
-                {% if LANGUAGE_CODE == 'es' %}
-                {% trans "DIRECTOR DE" %} 
-                <span class="d-md-none">FOTO</span>
-                <span class="d-none d-md-inline">FOTOGRAFÍA</span>
-                {% else %}
-                {% trans "DIRECTOR DE FOTOGRAFÍA" %}
-                {% endif %}
-            </a>
+            {% for cat in categorias_globales %}
+                <a href="{% url 'categoria_detalle' cat.slug %}">
+                    {% if cat.slug == 'director-de-fotografia' %}
+                        {# Lógica especial para acortar el nombre en pantallas muy pequeñas #}
+                        {% trans "DIR. DE" %} <span class="d-inline d-sm-none">FOTO</span><span class="d-none d-sm-inline">FOTOGRAFÍA</span>
+                    {% else %}
+                        {{ cat.nombre|upper }}
+                    {% endif %}
+                </a>
+            {% endfor %}
         </div>
         <div class="menu-about">
             <a href="{% url 'about_me' %}">{% trans "SOBRE MÍ" %}</a>
