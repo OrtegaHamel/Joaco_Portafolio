@@ -1,3 +1,4 @@
+import os
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
@@ -17,5 +18,6 @@ urlpatterns += i18n_patterns(
 )
 
 # 3. Archivos estáticos
-if settings.DEBUG:
+# Permite que Django sirva archivos MEDIA durante el desarrollo
+if settings.DEBUG or os.getenv('SERVIR_MEDIA_LOCAL') == 'True':
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
