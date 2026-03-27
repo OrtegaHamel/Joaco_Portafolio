@@ -10,7 +10,11 @@
         <h1 class="display-4 fw-bold mb-4 text-center text-uppercase">{{ proyecto.nombre }}</h1>
 
         {% if proyecto.ficha_tecnica %}
-            <div class="text-end mt-5 pt-4 pb-4"> <p class="lead text-secondary">{{ proyecto.ficha_tecnica|linebreaks }}</p>
+            <div class="text-end mt-5 pt-4 pb-4"> 
+                <!-- Usamos un div para que los <p> que crea |linebreaks no rompan el HTML -->
+                <div class="lead text-secondary text-custom-retro">
+                    {{ proyecto.ficha_tecnica|linebreaks }}
+                </div>
             </div>
         {% endif %}
 
@@ -94,7 +98,10 @@
         {% if proyecto.descripcion %}
         <div class="mt-5 pt-4">
             <div class="col-md-8 mx-auto">
-                <p class="lead text-secondary text-center">{{ proyecto.descripcion|linebreaks }}</div>
+                <!-- Cambiado p por div para permitir los párrafos internos de linebreaks -->
+                <div class="lead text-secondary text-center text-custom-retro">
+                    {{ proyecto.descripcion|linebreaks }}
+                </div>
             </div>
         </div>
         {% endif %}

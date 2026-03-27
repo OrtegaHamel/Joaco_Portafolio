@@ -29,11 +29,7 @@
                         {% for cat in categorias_globales %}
                             <a class="nav-link text-white p-0 text-uppercase" 
                             href="{% url 'categoria_detalle' cat.slug %}">
-                                {% if cat.slug == 'director-de-fotografia' %}
-                                    {{ cat.nombre|slice:":11" }} <span class="d-md-none">FOTO</span><span class="d-none d-md-inline">FOTOGRAFÍA</span>
-                                {% else %}
-                                    {{ cat.nombre }}
-                                {% endif %}
+                                {{ cat.nombre }}
                             </a>
                         {% endfor %}
                     </div>

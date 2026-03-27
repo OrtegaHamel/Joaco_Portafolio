@@ -56,6 +56,18 @@ h4, .contacto-section {
 span.text-warning.small {
   font-size: 0.9rem;
   font-family: "Jersey 10", sans-serif;
+  display: inline-block;
+}
+
+/* Clase de utilidad para estilo retro con color dorado */
+.text-custom-retro, 
+.text-custom-retro p {
+    font-family: "Jersey 20", sans-serif !important;
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+    color: #ffd966 !important;
+    text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2); /* Opcional: da profundidad tipo pixel-art */
+    margin-bottom: 0.5rem;
 }
 
 /* ==========================================================================
