@@ -1,4 +1,4 @@
-# 🎬 Joaco Portafolio (En Desarrollo)
+# 🎬 Joaco Portafolio 
 
 Este es el sitio web personal y portafolio profesional del realizador audiovisual Joaquín Fernández. El proyecto se encuentra actualmente en fase de **desarrollo activo**. El objetivo es crear una plataforma trilingüe dinámica para exhibir trabajos de realización, postproducción y dirección de fotografía.
 
@@ -29,4 +29,3 @@ Este es el sitio web personal y portafolio profesional del realizador audiovisua
 
 ---
 
-Tipo de ArchivoQuién lo manejaCarpeta en el ServidorCódigo PythonPassenger (Python 3.11)joaco_app/Estáticos (CSS/JS)WhiteNoisejoaco_app/staticfiles/Media (Fotos Admin)Apachepublic_html/media/
