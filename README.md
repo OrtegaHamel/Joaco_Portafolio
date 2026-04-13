@@ -47,6 +47,7 @@ pillow==12.1.0
 PyMySQL==1.1.2
 python-dotenv==1.2.1
 
+---
 
 ## 📄 Licencia
 
