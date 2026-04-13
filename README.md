@@ -1,14 +1,10 @@
-# 🎬 Joaco Portafolio 
-
- El proyecto se encuentra actualmente en fase de **desarrollo activo**. El objetivo es crear una plataforma trilingüe dinámica para exhibir trabajos de realización, postproducción y dirección de fotografía.
-
----
-
-# Joaco.fr - Portafolio Profesional & Experimental
+# Joaco.fr - Portafolio Profesional
 
 Este es mi primer proyecto como desarrollador independiente. Es el sitio web personal y portafolio profesional del realizador audiovisual Joaquín Fernández, una plataforma web desarrollada con **Django 5.2**, diseñada como un laboratorio técnico donde implementé soluciones de internacionalización, gestión de archivos en servidores de producción y animaciones interactivas en el frontend.
 
 🌐 **Sitio en vivo:** [https://joaco.fr](https://joaco.fr)
+
+---
 
 ## 🚀 Desafíos Técnicos y Aprendizajes
 
@@ -50,3 +46,9 @@ whitenoise==6.6.0
 pillow==12.1.0
 PyMySQL==1.1.2
 python-dotenv==1.2.1
+
+
+## 📄 Licencia
+
+Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.  
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
