@@ -39,7 +39,6 @@ En lugar de IDs numéricos, el sitio utiliza **Slugs** para las URLs de los proy
 
 ## 📦 Dependencias Principales
 
-```text
 Django==5.2
 django-modeltranslation==0.19.19
 whitenoise==6.6.0
