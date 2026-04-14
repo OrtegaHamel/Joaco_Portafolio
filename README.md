@@ -4,10 +4,10 @@ Este es mi primer proyecto como desarrollador independiente. Es el sitio web per
 
 🌐 **Sitio en vivo:** [https://joaco.fr](https://joaco.fr)  
 
-`![Home Page](screenshots/home.png)`
-`![Home Page](screenshots/categoria.png)`
-`![Home Page](screenshots/detalle_proyecto.png)`
-`![Home Page](screenshots/aboutme.png)`
+![Home Page](./screenshots/home.png)
+![Categoría](./screenshots/categoria.png)
+![Detalle Proyecto](./screenshots/detalle_proyecto.png)
+![Sobre mí](./screenshots/aboutme.png)
 
 ---
 
