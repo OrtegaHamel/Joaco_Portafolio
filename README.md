@@ -2,7 +2,12 @@
 
 Este es mi primer proyecto como desarrollador independiente. Es el sitio web personal y portafolio profesional del realizador audiovisual Joaquín Fernández, una plataforma web desarrollada con **Django 5.2**, diseñada como un laboratorio técnico donde implementé soluciones de internacionalización, gestión de archivos en servidores de producción y animaciones interactivas en el frontend.
 
-🌐 **Sitio en vivo:** [https://joaco.fr](https://joaco.fr)
+🌐 **Sitio en vivo:** [https://joaco.fr](https://joaco.fr)  
+
+`![Home Page](screenshots/home.png)`
+`![Home Page](screenshots/categoria.png)`
+`![Home Page](screenshots/detalle_proyecto.png)`
+`![Home Page](screenshots/aboutme.png)`
 
 ---
 
